@@ -6,8 +6,7 @@ ifndef DEVICE_ID
 endif
 
 run: install
-    # Todo: change the bundle identifier (then remove this comment :P)
-	xcrun simctl launch --console $(DEVICE) me.nikl.bevygame
+	xcrun simctl launch --console $(DEVICE) {{reverse_domain}}.{{ crate_name | replace: "_", "" }}
 
 boot-sim:
 	xcrun simctl boot $(DEVICE) || true

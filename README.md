@@ -17,8 +17,20 @@ WARNING: if you work in a private repository, please be aware that macOS and Win
 
 # How to use this template?
 
- 1. Click "Use this template" on the repository's page
- 2. Look for `ToDo` to use your own game name everywhere
+This template is set up for [`cargo-generate`][cargo-generate], which fills in your game's
+name and identifiers automatically.
+
+ 1. Install it once with `cargo install cargo-generate`
+ 2. Scaffold a new project from this template:
+    ```sh
+    cargo generate --git https://github.com/NiklasEi/bevy_game_template
+    ```
+    You will be prompted for:
+    * **project name** – kebab-case (e.g. `my-bevy-game`); the crate/executable name is the
+      snake_case form (`my_bevy_game`)
+    * **game title** – the human-readable name shown in the window title bar and app stores
+    * **reverse-domain prefix** – used to build the iOS/Android/macOS bundle identifier
+      (e.g. `com.example` becomes `com.example.mybevygame`)
  3. [Update the icons as described below](#updating-the-icons)
  4. Start coding :tada:
     * Start the native app: `cargo run`
@@ -110,6 +122,7 @@ This project is licensed under [CC0 1.0 Universal](LICENSE) except some content 
 [firefox-sound-issue]: https://github.com/NiklasEi/bevy_kira_audio/issues/9
 [Bevy Cheat Book]: https://bevy-cheatbook.github.io/introduction.html
 [trunk]: https://github.com/trunk-rs/trunk
+[cargo-generate]: https://github.com/cargo-generate/cargo-generate
 [android-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup
 [ios-instructions]: https://github.com/bevyengine/bevy/blob/latest/examples/README.md#setup-1
 [mobile_dev_with_bevy_2]: https://www.nikl.me/blog/2023/notes_on_mobile_development_with_bevy_2/

@@ -1,0 +1,30 @@
+# Configuration for `cargo generate` (https://cargo-generate.github.io/cargo-generate/).
+# Scaffold a new game from this template with:
+#   cargo generate --git https://github.com/<you>/bevy_game_template
+#
+# Besides the two prompts below, the following built-in variables are used:
+#   {{project-name}}  the name you give the project (kebab-case, e.g. `my-bevy-game`)
+#   {{crate_name}}    snake_case version of the project name (e.g. `my_bevy_game`)
+#   {{authors}}       taken from your git config
+[template]
+cargo_generate_version = ">=0.18.0"
+# Files listed here are copied verbatim, skipping the Liquid templating engine.
+exclude = [
+    # ci.yml uses GitHub Actions `${{ ... }}` expressions but has nothing to substitute.
+    ".github/workflows/ci.yml",
+    # Binary assets (icons, images, audio) have no placeholders and are not valid UTF-8/Liquid.
+    "**/*.png",
+    "**/*.ico",
+    "**/*.icns",
+    "**/*.jpg",
+    "**/*.jpeg",
+    "**/*.ogg",
+    "**/*.wav",
+    "**/*.mp3",
+    "**/*.ttf",
+    "**/*.otf",
+]
+
+[placeholders]
+game_name = { type = "string", prompt = "Human-readable game title (shown in the window title bar and app stores)", default = "My Bevy Game" }
+reverse_domain = { type = "string", prompt = "Reverse-domain prefix for the iOS/Android/macOS bundle identifier", default = "com.example" }

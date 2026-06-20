@@ -14,17 +14,19 @@ on:
         required: true
         type: string
 
-# ToDo: adapt names
 env:
   # used for uploading the app to a GitHub release
-  GAME_EXECUTABLE_NAME: bevy_game
+  GAME_EXECUTABLE_NAME: {{crate_name}}
   BUNDLE_PATH: "target/x/release/android/mobile.aab"
-  PACKAGE_NAME: "me.nikl.bevygame"
+  PACKAGE_NAME: "{{reverse_domain}}.{{ crate_name | replace: "_", "" }}"
   # release track; you can promote a build to "higher" tracks in the play console or publish to a different track directly
   # see track at https://github.com/r0adkll/upload-google-play#inputs for more options
   TRACK: internal
   MOBILE_DIRECTORY: mobile
 
+# Everything below uses GitHub Actions expressions whose syntax collides with cargo-generate's
+# Liquid syntax, so it is wrapped in a Liquid raw block to be copied through unchanged.
+{% raw %}
 permissions:
   contents: write
 
@@ -74,3 +76,4 @@ jobs:
           releaseName: ${{ inputs.play_release }}
           releaseFiles: ${{ env.BUNDLE_PATH }}
           track: ${{ env.TRACK }}
+{% endraw %}

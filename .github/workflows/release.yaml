@@ -11,12 +11,14 @@ on:
         required: true
         type: string
 
-# ToDo: adapt names
 env:
   # This variable is used to name release output files.
-  GAME_EXECUTABLE_NAME: bevy_game
-  GAME_OSX_APP_NAME: BevyGame
+  GAME_EXECUTABLE_NAME: {{crate_name}}
+  GAME_OSX_APP_NAME: {{ crate_name | pascal_case }}
 
+# Everything below uses GitHub Actions expressions whose syntax collides with cargo-generate's
+# Liquid syntax, so it is wrapped in a Liquid raw block to be copied through unchanged.
+{% raw %}
 permissions:
   contents: write
 
@@ -270,3 +272,4 @@ jobs:
           release_name: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
           overwrite: true
+{% endraw %}

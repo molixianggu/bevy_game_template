@@ -16,13 +16,15 @@ on:
         required: true
         type: string
 
-# ToDo: adapt names
 env:
   # used for uploading the app to a GitHub release
-  GAME_EXECUTABLE_NAME: bevy_game
+  GAME_EXECUTABLE_NAME: {{crate_name}}
   XCODE_PROJECT: mobile
   MOBILE_DIRECTORY: mobile
 
+# Everything below uses GitHub Actions expressions whose syntax collides with cargo-generate's
+# Liquid syntax, so it is wrapped in a Liquid raw block to be copied through unchanged.
+{% raw %}
 permissions:
   contents: write
 
@@ -96,3 +98,4 @@ jobs:
           release_name: ${{ inputs.version }}
           tag: ${{ inputs.version }}
           overwrite: true
+{% endraw %}
